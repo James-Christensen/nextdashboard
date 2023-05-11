@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
+
+model results {
+  id            Int     @id @unique
+  segment       String
+  segment_total String?
+  jan           Int?
+  feb           Int?
+  mar           Int?
+  apr           Int?
+  may           Int?
+  jun           Int?
+  jul           Int?
+  aug           Int?
+  sep           Int?
+  oct           Int?
+  nov           Int?
+  dec           Int?
+}
+
+model targets {
+  id            Int     @id @unique
+  segment       String
+  segment_total String?
+  jan           Int?
+  feb           Int?
+  mar           Int?
+  apr           Int?
+  may           Int?
+  jun           Int?
+  jul           Int?
+  aug           Int?
+  sep           Int?
+  oct           Int?
+  nov           Int?
+  dec           Int?
+}
+
+model month_forecast {
+    id            Int     @id @unique
+  segment       String
+  current   Int?
+  forecast Int?
+}
+
+model pipeline {
+    id            Int     @id @unique
+  segment       String
+  date DateTime?
+  product String
+  prospecting   Int?
+  qualification Int?
+needs_analysis Int?
+  meeting_demo Int?
+  negotiation_review Int?
+  proposal_price_quote Int?
+    pipeline_total Int?
+  closed_won Int?
+  closed_lost Int?
+
+}
