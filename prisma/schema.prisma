@@ -1,71 +1,79 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+  provider          = "postgresql"
+  url               = "postgres://default:7dUFgOI8Jzfa@ep-cool-sun-117565-pooler.us-west-2.postgres.vercel-storage.com:5432/verceldb?pgbouncer=true&connect_timeout=15"
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model results {
   id            Int     @id @unique
   segment       String
-  segment_total String?
-  jan           Int?
-  feb           Int?
-  mar           Int?
-  apr           Int?
-  may           Int?
-  jun           Int?
-  jul           Int?
-  aug           Int?
-  sep           Int?
-  oct           Int?
-  nov           Int?
-  dec           Int?
+  jan           Float?
+  feb           Float?
+  mar           Float?
+  apr           Float?
+  may           Float?
+  jun           Float?
+  jul           Float?
+  aug           Float?
+  sep           Float?
+  oct           Float?
+  nov           Float?
+  dec           Float?
+  segment_total Float?
 }
 
 model targets {
   id            Int     @id @unique
   segment       String
-  segment_total String?
-  jan           Int?
-  feb           Int?
-  mar           Int?
-  apr           Int?
-  may           Int?
-  jun           Int?
-  jul           Int?
-  aug           Int?
-  sep           Int?
-  oct           Int?
-  nov           Int?
-  dec           Int?
+  jan           Float?
+  feb           Float?
+  mar           Float?
+  apr           Float?
+  may           Float?
+  jun           Float?
+  jul           Float?
+  aug           Float?
+  sep           Float?
+  oct           Float?
+  nov           Float?
+  dec           Float?
+  segment_total Float?
 }
 
 model month_forecast {
-    id            Int     @id @unique
-  segment       String
-  current   Int?
-  forecast Int?
+  id       Int    @id @unique
+  segment  String
+  current  Float?
+  forecast Float?
 }
 
-model pipeline {
-    id            Int     @id @unique
-  segment       String
-  date DateTime?
-  product String
-  prospecting   Int?
-  qualification Int?
-needs_analysis Int?
-  meeting_demo Int?
-  negotiation_review Int?
-  proposal_price_quote Int?
-    pipeline_total Int?
-  closed_won Int?
-  closed_lost Int?
+model Pipeline {
+  id                   Int    @id @unique
+  segment              String
+  week_id              Int
+  product              String
+  prospecting          Float?
+  qualification        Float?
+  needs_analysis       Float?
+  meeting_demo         Float?
+  negotiation_review   Float?
+  proposal_price_quote Float?
+  pipeline_total       Float?
+  closed_won           Float?
+  closed_lost          Float?
+  week                 Week   @relation(fields: [week_id], references: [id])
 
+  @@index([week_id], map: "week_id")
+}
+
+model Week {
+  id        Int        @id @unique
+  date      DateTime
+  pipelines Pipeline[]
 }
