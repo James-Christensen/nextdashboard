@@ -43,6 +43,7 @@ export default function WeekTable({ week, title }) {
             <TableRow sx={{ borderColor: "#292929" }}>
               {columns.map((column) => (
                 <TableCell
+                  key={column}
                   sx={{ color: "black", borderColor: "#292929" }}
                   className="text-md font-medium text-center"
                 >

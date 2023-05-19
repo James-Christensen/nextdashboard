@@ -91,6 +91,7 @@ export default function PipelineChanges({ currentWeek, priorWeek }) {
               </TableCell>
               {columns.map((column) => (
                 <TableCell
+                  key={column}
                   //   sx={{ color: "black", borderColor: "#292929" }}
                   className="text-sm text-center px1"
                   colSpan="2"
