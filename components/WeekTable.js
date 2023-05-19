@@ -35,7 +35,7 @@ export default function WeekTable({ week, title }) {
       <h1 className="text-lg w-full text-center mb-2">{title}</h1>
       <TableContainer
         sx={{ bgcolor: "#64748b" }}
-        className="w-10/12"
+        className="w-11/12"
         component={Paper}
       >
         <Table size="small" aria-label="simple table">

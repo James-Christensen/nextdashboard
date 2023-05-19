@@ -2,6 +2,7 @@
 //outputs a comparison of the most recent and the prior weeks.
 import React from "react";
 import WeekTable from "../../../components/WeekTable";
+import PipelineChanges from "../../../components/PipelineChanges";
 
 //bring in prisma client
 import { PrismaClient } from "@prisma/client";
@@ -57,16 +58,13 @@ export default async function Weekly() {
   //weeks to use in table and comparision data.
   const priorWeek = updateWeekObject(weekTwo.reverse(), weeks);
   const currentWeek = updateWeekObject(weekOne.reverse(), weeks);
-  console.log(priorWeek);
-  console.log(currentWeek);
+  // console.log(priorWeek);
+  // console.log(currentWeek);
 
   return (
     <main className="flex flex-col items-center grow w-full h-full justify-center">
-      <WeekTable
-        week={currentWeek}
-        title={`Current Week ${currentWeek[0].week}`}
-      />
-      <div className="my-2"> Prior Week: {priorWeek[0].week}</div>
+      <PipelineChanges currentWeek={currentWeek} priorWeek={priorWeek} />
+      <WeekTable week={priorWeek} title={`Prior Week: ${priorWeek[0].week}`} />
     </main>
   );
 }
