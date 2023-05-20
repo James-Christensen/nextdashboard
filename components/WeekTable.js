@@ -8,27 +8,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import {options,columns} from "../public/helpers/helpers";
 
-const options = {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 0,
-};
 
 export default function WeekTable({ week, title }) {
-  console.log(week);
-  const columns = [
-    "Segment",
-    "Prospecting",
-    "Needs Analysis",
-    "Meeting/Demo",
-    "Proposal/Quote",
-    "Negotiation/Review",
-    "Pipeline Total",
-    "Closed Won",
-    "Closed Lost",
-  ];
 
   return (
     <>

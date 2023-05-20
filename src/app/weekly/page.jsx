@@ -3,6 +3,7 @@
 import React from "react";
 import WeekTable from "../../../components/WeekTable";
 import PipelineChanges from "../../../components/PipelineChanges";
+import { updateWeekObject,formatDate } from "../../../public/helpers/helpers";
 
 //bring in prisma client
 import { PrismaClient } from "@prisma/client";
@@ -24,27 +25,7 @@ async function getWeeks() {
   const weeks = await prisma.Week.findMany();
   return weeks;
 }
-//Helper function to convert week input to week value for display in table. can be moved
-function formatDate(input) {
-  const formattedDate = new Date(
-    input.getUTCFullYear(),
-    input.getUTCMonth(),
-    input.getUTCDate()
-  ).toLocaleDateString("en-US", { month: "long", day: "numeric" });
-  return formattedDate;
-}
-//helper function can be moved.
-function updateWeekObject(weekInput, weeksArray) {
-  return weekInput.map((item) => {
-    const matchingWeek = weeksArray.find((week) => week.id === item.week_id);
-    const weekDate = matchingWeek ? matchingWeek.date : null;
 
-    return {
-      ...item,
-      week: formatDate(weekDate),
-    };
-  });
-}
 
 //server componenet is async and awaits the pipeline
 export default async function Weekly() {

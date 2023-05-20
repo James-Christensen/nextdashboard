@@ -56,10 +56,13 @@ export default function ButtonAppBar() {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>
-                <Link href="/update">Update</Link>
+                <Link href="/progress">Progress Table</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link href="/weekly">Weekly</Link>
+                <Link href="/weekly">Weekly Pipeline</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link href="/update">Update Page</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link href="/add">Add Data</Link>

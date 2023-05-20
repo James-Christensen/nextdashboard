@@ -9,66 +9,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+import { calculateChanges, options,columns } from "../public/helpers/helpers";
+
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 const darkTheme = createTheme({ palette: { mode: "dark" } });
 
-//Helper Function tocalculate changes in pipeline from week 1 to week 2
-function calculateChanges(array1, array2) {
-  const changesArray = [];
-  const excludedFields = ["id", "segment", "week", "product", "week_id"];
-
-  array1.forEach((obj1, i) => {
-    const obj2 = array2[i];
-    const diff = {};
-
-    Object.keys(obj1).forEach((key) => {
-      if (!excludedFields.includes(key)) {
-        const value1 = obj1[key];
-        const value2 = obj2[key];
-        const difference = value1 - value2;
-
-        diff[`${key}_diff`] = difference;
-        diff[`${key}_percent`] =
-          value1 !== 0
-            ? parseFloat(((difference / value1) * 100).toFixed(1))
-            : 0; // add percentage change rounded to 1 decimal place
-      }
-    });
-
-    if (Object.keys(diff).length !== 0) {
-      diff.id = obj1.id;
-      diff.segment = obj1.segment;
-      diff.week = obj1.week;
-      diff.product = obj1.id;
-      changesArray.push(diff);
-    }
-  });
-
-  return changesArray;
-}
-
-const options = {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 0,
-};
 
 export default function PipelineChanges({ currentWeek, priorWeek }) {
-  const columns = [
-    "Prospecting",
-    "Needs Analysis",
-    "Meeting/Demo",
-    "Proposal/Quote",
-    "Negotiation/Review",
-    "Pipeline Total",
-    "Closed Won",
-    "Closed Lost",
-  ];
 
   const changes = calculateChanges(currentWeek, priorWeek);
 
-  //helper function to combine changes and current week data
+  //Combine changes and current week data
   let weeklyPipelineChanges = currentWeek.map((obj) => {
     let changeObj = changes.find((change) => change.segment === obj.segment);
     if (changeObj) {
@@ -77,8 +28,6 @@ export default function PipelineChanges({ currentWeek, priorWeek }) {
       return obj;
     }
   });
-
-  console.log(weeklyPipelineChanges);
 
   return (
     <ThemeProvider theme={darkTheme}>

@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html className="m-0 h-screen" lang="en">
+    <html data-theme="business" className="m-0 h-screen" lang="en">
       <body>
         <div className="flex flex-col w-full h-screen ">
           <AppBar />
