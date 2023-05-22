@@ -62,10 +62,7 @@ export default function ButtonAppBar() {
                 <Link href="/weekly">Weekly Pipeline</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link href="/update">Update Page</Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link href="/add">Add Data</Link>
+                <Link href="/add">Forecast</Link>
               </MenuItem>
             </Menu>
           </div>

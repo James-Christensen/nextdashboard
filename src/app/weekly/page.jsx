@@ -15,7 +15,7 @@ export const revalidate = 300;
 async function getTwoWeeksPipeline() {
   const pipeline = await prisma.Pipeline.findMany({
     take: 12, // Retrieve only the last 12 entries
-    orderBy: { id: "desc" }, // Order the entries by createdAt in descending order
+    orderBy: { id: "desc" }, // Order the entries by id in descending order
   });
   return pipeline;
 }

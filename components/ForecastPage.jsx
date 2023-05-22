@@ -1,6 +1,6 @@
 "use client";
 import {React, useState, useEffect} from "react";
-import { getCurrentMonth,calculateTotals,updateForecastData } from "../public/helpers/helpers";
+import { getCurrentMonth,calculateTotals,updateForecastData,calculateResultData,updateResultsData } from "../public/helpers/helpers";
 import ForecastTable from "./ForecastTable";
 import UpdateMonth from "./UpdateMonth";
 
@@ -10,17 +10,20 @@ import UpdateMonth from "./UpdateMonth";
     const displayMonth = currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1);
       const [monthData, setMonthData] = useState(data);
     //   const [resultData, setResultData] = useState();
-    
+    console.log(monthData)
       useEffect(() => {
     const month = getCurrentMonth();
     setCurrentMonth(month);
   }, []);
-
+  
+  const newResultData = calculateResultData(monthData, currentMonth);
 
 
   async function handleSave() {
     await calculateTotals(monthData);
     await updateForecastData(monthData);
+    const newResultData = calculateResultData(monthData, currentMonth);
+    await updateResultsData(newResultData);
     setIsEditing(!isEditing);
   }
   const handleEdit = () => {

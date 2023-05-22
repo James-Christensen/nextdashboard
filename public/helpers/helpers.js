@@ -188,3 +188,27 @@ export  async function updateForecastData(data) {
   const updatedForecast = await response.json();
   return updatedForecast;
 } 
+//async function to update results data from forecast page
+export async function updateResultsData(data) {
+  const response = await fetch("/api/results", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  const updatedResults = await response.json();
+  return updatedResults;
+}
+
+//helper function to create data for updating the results table. 
+export function calculateResultData(data, month) {
+  const monthAbbr = month.slice(0, 3).toLowerCase();
+  const newData = data.map(obj => {
+    return {
+      id: obj.id,
+      segment: obj.segment,
+      current: obj.current,
+      month: monthAbbr
+    }
+  });
+  return newData;
+}

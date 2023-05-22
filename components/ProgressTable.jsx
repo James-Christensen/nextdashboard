@@ -180,22 +180,22 @@ export default function ProgressTable({ targets, results, forecast }) {
           <tr className="text-center text-xs">
             <td className="text-center text-xs">APM Solutions</td>
             <td className="text-center text-xs">
-              {forecast[3].current.toLocaleString("en-US", options)}
+              {forecast[4].current.toLocaleString("en-US", options)}
             </td>
             <td className="text-center text-xs">
-              {forecast[3].forecast.toLocaleString("en-US", options)}
+              {forecast[4].forecast.toLocaleString("en-US", options)}
             </td>
             <td className="text-center text-xs">
               {targets[4][currentMonth].toLocaleString("en-US", options)}
             </td>
             <td className="text-center text-xs">
               {(
-                (forecast[3].forecast / targets[4][currentMonth]) *
+                (forecast[4].forecast / targets[4][currentMonth]) *
                 100
               ).toFixed(0) + "%"}
             </td>
             <td className="text-center text-xs">
-              {((forecast[3].current / targets[3][currentMonth]) * 100).toFixed(
+              {((forecast[4].current / targets[3][currentMonth]) * 100).toFixed(
                 0
               ) + "%"}
             </td>
