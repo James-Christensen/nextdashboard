@@ -1,9 +1,8 @@
 "use client";
 import {React, useState, useEffect} from "react";
-import { getCurrentMonth,calculateTotals } from "../public/helpers/helpers";
+import { getCurrentMonth,calculateTotals,updateForecastData } from "../public/helpers/helpers";
 import ForecastTable from "./ForecastTable";
 import UpdateMonth from "./UpdateMonth";
-
 
   export default function ForecastPage({data}){
     const [isEditing, setIsEditing] = useState(false);
@@ -19,9 +18,9 @@ import UpdateMonth from "./UpdateMonth";
 
 
 
-  const handleSave = () =>{
-    alert('saved')
-    calculateTotals(monthData)
+  async function handleSave() {
+    await calculateTotals(monthData);
+    await updateForecastData(monthData);
     setIsEditing(!isEditing);
   }
   const handleEdit = () => {
@@ -35,14 +34,17 @@ import UpdateMonth from "./UpdateMonth";
   };
 
 
+ 
+
     if (isEditing === true) {
         return (
           <div className="flex flex-col justify-center items-center w-1/2 mx-auto">
             <h1 className="mb-1 text-2xl  text-warning">Editing...</h1>
             <UpdateMonth data={monthData} onUpdate={handleInputChange} />
+            <div className="flex w-full justify-end mb-5">
             <button
               onClick={handleUpdateResults}
-              className="btn btn-outline btn-warning self-end"
+              className="btn btn-outline btn-warning self-end mx-4"
             >
               Update Test
             </button>
@@ -53,6 +55,7 @@ import UpdateMonth from "./UpdateMonth";
               >
                 Save
               </button>
+              </div>
             </div>
           </div>
         );
@@ -63,7 +66,7 @@ import UpdateMonth from "./UpdateMonth";
           <ForecastTable data={monthData} />
           <button
             onClick={handleEdit}
-            className="btn btn-outline btn-info self-end"
+            className="btn btn-outline btn-info self-end mb-5"
           >
             Edit
           </button>

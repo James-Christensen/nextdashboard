@@ -1,7 +1,6 @@
 import React from 'react'
 //Prisma stuff
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from '../../../public/helpers/Client';
 export const revalidate = 300;
 
 import ProgressTable from '../../../components/ProgressTable';

@@ -1,24 +1,5 @@
 import React from 'react';
-import { options,formatCurrency } from '../public/helpers/helpers';
-
-//function that corrects the display of segment values. 
-//The function makes the first letter uppercase and replaces "_" with a space. 
-function formatSegment(segment) {
-    let formattedSegment = segment
-      .split("_")
-      .map((word) => word[0].toUpperCase() + word.slice(1))
-      .join(" ");
-  
-    if (formattedSegment.startsWith("Apm")) {
-      formattedSegment = formattedSegment.replace("Apm", "APM ");
-    } else if (formattedSegment.startsWith("Mips")) {
-      formattedSegment = formattedSegment.replace("Mips", "MIPS ");
-    }
-  
-    return formattedSegment;
-  }
-
-
+import { formatCurrency,formatSegment } from '../public/helpers/helpers';
 
 
 

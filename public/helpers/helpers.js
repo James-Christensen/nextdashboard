@@ -163,3 +163,28 @@ export function calculateChanges(array1, array2) {
     newData[5].current = newTotalCurrent
     newData[5].forecast = newTotalForecast
 }
+
+export function formatSegment(segment) {
+  let formattedSegment = segment
+    .split("_")
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(" ");
+
+  if (formattedSegment.startsWith("Apm")) {
+    formattedSegment = formattedSegment.replace("Apm", "APM ");
+  } else if (formattedSegment.startsWith("Mips")) {
+    formattedSegment = formattedSegment.replace("Mips", "MIPS ");
+  }
+
+  return formattedSegment;
+}
+
+export  async function updateForecastData(data) {
+  const response = await fetch("/api/forecast", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  const updatedForecast = await response.json();
+  return updatedForecast;
+} 

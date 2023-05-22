@@ -2,9 +2,9 @@ import {React} from "react";
 import ForecastPage from "../../../components/ForecastPage";
 
 //get month_forecast data from Prisma
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "../../../public/helpers/Client";
 export const revalidate = 300;
+
 //async function to get forecastData from Prisma Postgres DB
 async function getForecastData () {
   const forecast = await prisma.month_forecast.findMany({
@@ -13,12 +13,23 @@ async function getForecastData () {
   });
   return forecast;
 }
+//Async function to update forecast data in Prisma Postgres DB
+async function updateForecastData (data) {
+  const forecast = await prisma.month_forecast.updateMany({
+    where: {id: data.id},
+    data: {
+      current: data.current,
+      forecast: data.forecast,
+    },
+  });
+  return forecast;
+}
 
 
 export default async function  AddData() {
   const data = await getForecastData();
 return(
-    <ForecastPage data={data}/>
+    <ForecastPage data={data}  />
 )
 }
 
