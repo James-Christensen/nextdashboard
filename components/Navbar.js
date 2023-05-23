@@ -33,13 +33,19 @@ export default function Navbar({ title }) {
                   href="/progress"
                   className="btn btn-ghost text-primary-content btn-sm rounded-btn"
                 >
-                  Month & YTD
+                  Progress
                 </Link>
                 <Link
                   href="/add"
                   className="btn btn-ghost text-primary-content btn-sm rounded-btn"
                 >
                   Forecast Page
+                </Link>
+                <Link
+                  href="/upload"
+                  className="btn btn-ghost text-primary-content btn-sm rounded-btn"
+                >
+                  File Upload
                 </Link>
               </ul>
             </div>

@@ -1,12 +1,19 @@
 import React from "react";
 //Prisma stuff
 import prisma from "../../../public/helpers/Client";
-export const revalidate = 30;
+export const revalidate = 0;
+
+const url = "http://localhost:3000/api/results";
 
 import ProgressTable from "../../../components/ProgressTable";
 async function getProgressData() {
   const targets = await prisma.targets.findMany({ orderBy: { id: "asc" } });
-  const results = await prisma.results.findMany({ orderBy: { id: "asc" } });
+  // const results = await prisma.results.findMany({ orderBy: { id: "asc" } });
+  const results = await fetch(
+    url,
+    { cache: "no-store" },
+    { next: { tags: ["resultData"] } }
+  ).then((res) => res.json());
   const forecast = await prisma.month_forecast.findMany({
     orderBy: { id: "asc" },
   });

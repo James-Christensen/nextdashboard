@@ -4,11 +4,11 @@ import {options,columns} from "../public/helpers/helpers";
 
 export default function WeekTable({ week, title }) {
   return (
-    <div className="w-11/12">
+    <div className="w-11/12 h-[270px]">
     <h1 className="text-sm mb-2 justify-self-start ml-1/5 mr-auto">
       {title}
     </h1>
-      <div className="overflow-x-auto mb-5 flex flex-col justify-center border rounded-sm border-primary">
+      <div className="overflow-x-auto flex flex-col justify-center border rounded-sm border-primary">
         <table className="table table-compact table-zebra w-full">
           <thead>
             <tr className="text-center text-xs">

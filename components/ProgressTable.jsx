@@ -1,15 +1,21 @@
 import React from "react";
 import {
-    getCurrentMonthAndRatio,
-    calculateYtdData,
-    options,
-  } from "../public/helpers/ProgressHelpers";
+  getCurrentMonthAndRatio,
+  calculateYtdData,
+  options,
+} from "../public/helpers/ProgressHelpers";
 
 const { currentMonth, currentMonthRatio } = getCurrentMonthAndRatio();
 
 export default function ProgressTable({ targets, results, forecast }) {
-  const { contract, non_contract, indirect,mips_total, apm_solutions, grand_total } =
-    calculateYtdData(targets, results);
+  const {
+    contract,
+    non_contract,
+    indirect,
+    mips_total,
+    apm_solutions,
+    grand_total,
+  } = calculateYtdData(targets, results);
 
   const MIPS_target = contract.target + non_contract.target + indirect.target;
   const MIPS_progress =
