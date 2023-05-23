@@ -47,8 +47,6 @@ export function calculateChanges(array1, array2) {
     "Proposal/Quote",
     "Negotiation/Review",
     "Pipeline Total",
-    "Closed Won",
-    "Closed Lost",
   ];
 
  export function formatDate(input) {

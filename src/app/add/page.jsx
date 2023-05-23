@@ -29,7 +29,9 @@ async function updateForecastData (data) {
 export default async function  AddData() {
   const data = await getForecastData();
 return(
+  <main className="flex flex-col items-center grow w-full h-full justify-center">
     <ForecastPage data={data}  />
+    </main>
 )
 }
 

@@ -44,7 +44,7 @@ export default async function Weekly() {
 
   return (
     <main className="flex flex-col items-center grow w-full h-full justify-center">
-      <PipelineChanges currentWeek={currentWeek} priorWeek={priorWeek} />
+      <PipelineChanges currentWeek={currentWeek} priorWeek={priorWeek} title={`Current Week: ${currentWeek[0].week}`} />
       <WeekTable week={priorWeek} title={`Prior Week: ${priorWeek[0].week}`} />
     </main>
   );

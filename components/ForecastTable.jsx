@@ -2,8 +2,8 @@ import React from 'react';
 import { formatCurrency,formatSegment } from '../public/helpers/helpers';
 
 
+export default function ForecastTable({ data,doubleClick }) {
 
-export default function ForecastTable({ data }) {
     return (
       <div className="overflow-x-auto mb-5 flex flex-col justify-center border rounded-sm border-primary w-full">
         <table className="table table-zebra w-full">
@@ -18,8 +18,8 @@ export default function ForecastTable({ data }) {
             {data.map((row) => (
               <tr className="text-center" key={row.id}>
                 <td className="text-center ">{formatSegment(row.segment)}</td>
-                <td className="text-center">{formatCurrency(row.current)}</td>
-                <td className="text-center">{formatCurrency(row.forecast)}</td>
+                <td className="text-center" onClick={doubleClick}>{formatCurrency(row.current)}</td>
+                <td className="text-center" onClick={doubleClick}>{formatCurrency(row.forecast)}</td>
               </tr>
             ))}
           </tbody>

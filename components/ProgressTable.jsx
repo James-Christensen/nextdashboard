@@ -63,12 +63,12 @@ export default function ProgressTable({ targets, results, forecast }) {
             </td>
             <td className="text-center text-xs">
               {(
-                (forecast[0].Forecast / targets[0][currentMonth]) *
+                (forecast[0].forecast / targets[0][currentMonth]) *
                 100
               ).toFixed(0) + "%"}
             </td>
             <td className="text-center text-xs">
-              {((forecast[0].Current / targets[0][currentMonth]) * 100).toFixed(
+              {((forecast[0].current / targets[0][currentMonth]) * 100).toFixed(
                 0
               ) + "%"}
             </td>

@@ -9,8 +9,7 @@ import UpdateMonth from "./UpdateMonth";
     const [currentMonth, setCurrentMonth] = useState("This Months");
     const displayMonth = currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1);
       const [monthData, setMonthData] = useState(data);
-    //   const [resultData, setResultData] = useState();
-    console.log(monthData)
+
       useEffect(() => {
     const month = getCurrentMonth();
     setCurrentMonth(month);
@@ -37,7 +36,11 @@ import UpdateMonth from "./UpdateMonth";
   };
 
 
- 
+  const doubleClick = (event) => {
+    if(event.detail == 2){
+      setIsEditing(!isEditing);
+    }
+  }
 
     if (isEditing === true) {
         return (
@@ -45,12 +48,6 @@ import UpdateMonth from "./UpdateMonth";
             <h1 className="mb-1 text-2xl  text-warning">Editing...</h1>
             <UpdateMonth data={monthData} onUpdate={handleInputChange} />
             <div className="flex w-full justify-end mb-5">
-            <button
-              onClick={handleUpdateResults}
-              className="btn btn-outline btn-warning self-end mx-4"
-            >
-              Update Test
-            </button>
             <div className="self-end">
               <button
                 onClick={handleSave}
@@ -66,7 +63,7 @@ import UpdateMonth from "./UpdateMonth";
       return (
         <div className="flex flex-col justify-center items-center w-1/2 mx-auto">
           <h1 className="mb-1 text-2xl">{`${displayMonth} Bookings and Forecast`}</h1>
-          <ForecastTable data={monthData} />
+          <ForecastTable data={monthData} doubleClick={doubleClick} />
           <button
             onClick={handleEdit}
             className="btn btn-outline btn-info self-end mb-5"

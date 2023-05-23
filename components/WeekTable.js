@@ -1,79 +1,67 @@
 "use client";
-
 import React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import {options,columns} from "../public/helpers/helpers";
 
-
 export default function WeekTable({ week, title }) {
-
   return (
-    <>
-      <h1 className="text-lg w-full text-center mb-2">{title}</h1>
-      <TableContainer
-        sx={{ bgcolor: "#64748b" }}
-        className="w-11/12"
-        component={Paper}
-      >
-        <Table size="small" aria-label="simple table">
-          <TableHead>
-            <TableRow sx={{ borderColor: "#292929" }}>
+    <div className="w-11/12">
+    <h1 className="text-sm mb-2 justify-self-start ml-1/5 mr-auto">
+      {title}
+    </h1>
+      <div className="overflow-x-auto mb-5 flex flex-col justify-center border rounded-sm border-primary">
+        <table className="table table-compact table-zebra w-full">
+          <thead>
+            <tr className="text-center text-xs">
+              <th key={"segment"} className="text-center text-xs w-40">
+                Segment
+              </th>
               {columns.map((column) => (
-                <TableCell
-                  key={column}
-                  sx={{ color: "black", borderColor: "#292929" }}
-                  className="text-md font-medium text-center"
-                >
+                <th key={column} className="text-center text-xs w-40">
                   {column}
-                </TableCell>
+                </th>
+                
               ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
+              <th className="text-center text-xs">
+                Closed Won
+              </th>
+              <th className="text-center text-xs ">
+                Closed Lost
+              </th>
+            </tr>
+          </thead>
+          <tbody>
             {week.map((row) => (
-              <TableRow sx={{ borderColor: "#292929" }} key={row.id}>
-                <TableCell
-                  component="th"
-                  scope="row"
-                  sx={{ borderColor: "#292929" }}
-                >
-                  {row.segment}
-                </TableCell>
-                <TableCell align="left" sx={{ borderColor: "#292929" }}>
+              <tr className="text-center text-xs" key={row.id}>
+                <td className="text-center text-xs">{row.segment}</td>
+                <td className="text-center text-xs">
                   {row.prospecting.toLocaleString("en-US", options)}
-                </TableCell>
-                <TableCell align="left" sx={{ borderColor: "#292929" }}>
+                </td>
+                <td className="text-center text-xs">
                   {row.needs_analysis.toLocaleString("en-US", options)}
-                </TableCell>
-                <TableCell align="left" sx={{ borderColor: "#292929" }}>
+                </td>
+                <td className="text-center text-xs">
                   {row.meeting_demo.toLocaleString("en-US", options)}
-                </TableCell>
-                <TableCell align="left" sx={{ borderColor: "#292929" }}>
+                </td>
+                <td className="text-center text-xs">
                   {row.proposal_price_quote.toLocaleString("en-US", options)}
-                </TableCell>
-                <TableCell align="left" sx={{ borderColor: "#292929" }}>
+                </td>
+                <td className="text-center text-xs">
                   {row.negotiation_review.toLocaleString("en-US", options)}
-                </TableCell>
-                <TableCell align="left" sx={{ borderColor: "#292929" }}>
+                </td>
+                <td className="text-center text-xs">
                   {row.pipeline_total.toLocaleString("en-US", options)}
-                </TableCell>
-                <TableCell align="left" sx={{ borderColor: "#292929" }}>
+                </td>
+                <td className="text-center text-xs">
                   {row.closed_won.toLocaleString("en-US", options)}
-                </TableCell>
-                <TableCell align="left" sx={{ borderColor: "#292929" }}>
+                </td>
+                <td className="text-center text-xs">
                   {row.closed_lost.toLocaleString("en-US", options)}
-                </TableCell>
-              </TableRow>
+                </td>
+              </tr>
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+          </tbody>
+        </table>
+      </div>
+      </div>
   );
 }
