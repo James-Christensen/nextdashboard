@@ -10,7 +10,7 @@ async function getProgressData() {
   const targets = await prisma.targets.findMany({ orderBy: { id: "asc" } });
   // const results = await prisma.results.findMany({ orderBy: { id: "asc" } });
   const results = await fetch(
-    url,
+    "/api/results",
     { cache: "no-store" },
     { next: { tags: ["resultData"] } }
   ).then((res) => res.json());
