@@ -8,12 +8,26 @@ const url = "http://localhost:3000/api/results";
 import ProgressTable from "../../../components/ProgressTable";
 async function getProgressData() {
   const targets = await prisma.targets.findMany({ orderBy: { id: "asc" } });
-  // const results = await prisma.results.findMany({ orderBy: { id: "asc" } });
-  const results = await fetch(
-    "/api/results",
-    { cache: "no-store" },
-    { next: { tags: ["resultData"] } }
-  ).then((res) => res.json());
+  let results;
+  try {
+    results = await fetch(
+      "/api/results",
+      { cache: "no-store" },
+      { next: { tags: ["resultData"] } }
+    ).then((res) => res.json());
+  } catch (error) {
+    console.error(error);
+    try {
+      results = await fetch(
+        "https://salesdashboard-orpin.vercel.app/api/results",
+        { cache: "no-store" },
+        { next: { tags: ["resultData"] } }
+      ).then((res) => res.json());
+    } catch (error) {
+      console.error(error);
+      results = await prisma.results.findMany({ orderBy: { id: "asc" } });
+    }
+  }
   const forecast = await prisma.month_forecast.findMany({
     orderBy: { id: "asc" },
   });
