@@ -3,29 +3,26 @@ import React from "react";
 import prisma from "../../../public/helpers/Client";
 export const revalidate = 0;
 
-const url = "http://localhost:3000/api/results";
-
+const baseUrl = process.env.API_BASE_URL || "http://localhost:3000";
 import ProgressTable from "../../../components/ProgressTable";
 async function getProgressData() {
   const targets = await prisma.targets.findMany({ orderBy: { id: "asc" } });
   let results;
   try {
-    results = await fetch(
-      "/api/results",
-      { cache: "no-store" },
-      { next: { tags: ["resultData"] } }
-    ).then((res) => res.json());
+    results = await fetch(`${baseUrl}/api/results`, {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ next: { tags: ["resultData"] } }),
+    }).then((res) => res.json());
   } catch (error) {
     console.error(error);
     try {
-      results = await fetch(
-        "https://salesdashboard-orpin.vercel.app/api/results",
-        { cache: "no-store" },
-        { next: { tags: ["resultData"] } }
-      ).then((res) => res.json());
+      results = await prisma.results.findMany({ orderBy: { id: "asc" } });
     } catch (error) {
       console.error(error);
-      results = await prisma.results.findMany({ orderBy: { id: "asc" } });
     }
   }
   const forecast = await prisma.month_forecast.findMany({
